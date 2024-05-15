@@ -3,7 +3,7 @@ name: Update vorstossdaten data
 on:
   workflow_dispatch:
   schedule:
-    - cron: '41 07 * * *'
+    - cron: '13 3 * * 6'
 
 jobs:
   build:
