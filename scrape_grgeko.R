@@ -1,4 +1,7 @@
-
+if (!require("janitor")) {
+  install.packages("janitor")
+  library(janitor)
+}
 library(rlang)
 library(rvest)
 library(dplyr)
