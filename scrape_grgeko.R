@@ -27,7 +27,7 @@ scrape_grgeko <- function(legislatur = 2020) {
   
   
   for (i in 1:10000) {
-    print(i)
+    # print(i)
     # Seite lesen, wenn möglich
     html <- tryCatch({
       rvest::read_html(glue::glue("https://grgeko.tg.ch/view?legislatur={legislatur}&grgnum={i}"))
