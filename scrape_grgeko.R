@@ -151,9 +151,9 @@ scrape_grgeko <- function(legislatur = 2020) {
     doc_df = data.frame(doc_title, doc_link, titel = title)
     
     # Einzelne Datensätze zu Liste hinzufügen
-    document_list[[title]] <- doc_df
-    data_list[[title]] <- temp_df
-    names_list[[title]] <- names_df
+    document_list[[paste0(title,"_",i)]] <- doc_df
+    data_list[[paste0(title,"_",i)]] <- temp_df
+    names_list[[paste0(title,"_",i)]] <- names_df
     Sys.sleep(.2)
   }
   
@@ -169,7 +169,7 @@ scrape_grgeko <- function(legislatur = 2020) {
     mutate(registraturnummer  = paste0(legislatur_nr,"/",kennung," ",laufnummer,"/",grg_nummer))
   
   join_reg <- data_df %>% 
-    select(registraturnummer,titel)
+    distinct(registraturnummer,titel)
   
   names_df <- names_df %>% 
     left_join(join_reg) %>% 
