@@ -194,7 +194,8 @@ prepare_ogd_vorstoesse <- function(data_list){
   # Vorstoesser
   vorstoesse <- data_list[[1]] %>% 
     mutate(datum_geschaeft_eingang = lubridate::dmy(eintrittsdatum)) %>% 
-    select(datum_geschaeft_eingang,registraturnummer,grg_nummer,geschaftstitel,geschaftsart,kennung,sachbegriff,status,departement) 
+    select(datum_geschaeft_eingang,registraturnummer,grg_nummer,geschaftstitel,geschaftsart,kennung,sachbegriff,status,departement) %>% 
+    rename(geschaeftsnummer = "registraturnummer")
   
   max_splits <- max(sapply(strsplit(vorstoesse$sachbegriff, ", \\d"), length))
   
@@ -204,7 +205,9 @@ prepare_ogd_vorstoesse <- function(data_list){
   
   # Vorstoesse
   vorstoesser <- data_list[[2]] %>% 
-    filter(!if_all(c(nachname, vorname, partei), is.na))    
+    filter(!if_all(c(nachname, vorname, partei), is.na))  %>% 
+    rename(geschaeftsnummer = "registraturnummer")
+  
 
   
   # 
@@ -225,7 +228,9 @@ prepare_ogd_vorstoesse <- function(data_list){
   # Dokumente
   
   dokumente <- data_list[[3]] %>%
-    filter(!is.na(doc_link))
+    filter(!is.na(doc_link)) %>% 
+    rename(geschaeftsnummer = "registraturnummer")
+  
     # group_by(titel,registraturnummer) %>% 
     # mutate(person_id = row_number()) %>%
     # ungroup() %>% 
